@@ -1,4 +1,6 @@
-﻿namespace EazyChain
+﻿using System;
+
+namespace EazyChain
 {
     public abstract class ChainRequest : IChainRequest
     {
