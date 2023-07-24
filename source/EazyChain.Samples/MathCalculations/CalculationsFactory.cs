@@ -4,7 +4,7 @@
     {
         public IChainHandler<CalculationsRequest> CreateChain()
         {
-            var second = new MultiplicationHandler(null);
+            var second = new MultiplicationHandler(null, new DumbRepository());
             var first = new AdditionHandler(second);
 
             return first;

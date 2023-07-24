@@ -24,7 +24,7 @@ namespace EazyChain.Registration
                 .ToList()
                 .ForEach(implementationType =>
                 {
-                    var chainFactory = implementationType.GetInterfaces().FirstOrDefault(y => y.IsGenericType && y.GetGenericTypeDefinition() == typeof(IChainFactory<>));
+                    var chainFactory = implementationType.GetInterfaces().FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IChainFactory<>));
 
                     if (chainFactory != null)
                     {

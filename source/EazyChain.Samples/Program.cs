@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using EazyChain.Registration;
+﻿using EazyChain.Registration;
 using EazyChain.Samples.MathCalculations;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,13 +10,19 @@ namespace EazyChain.Samples
         {
             var services = new ServiceCollection();
 
-            services.AddEazyChain(Assembly.GetExecutingAssembly());
+            services.AddSingleton<ChainProfile<CalculationsRequest>, MyChainProfile>();
+            services.AddTransient(typeof(IChainFactory<>), typeof(ChainFactory<>));
+            services.AddTransient<DumbRepository>();
+
+            //services.AddEazyChain(Assembly.GetExecutingAssembly());
 
             var provider = services.BuildServiceProvider();
 
             var factory = provider.GetRequiredService<IChainFactory<CalculationsRequest>>();
 
-            Console.WriteLine(factory.CreateChain().Handle(new CalculationsRequest
+            var chain = factory.CreateChain();
+
+            Console.WriteLine(chain.Handle(new CalculationsRequest
             {
                 Value = 10,
             }).Value);

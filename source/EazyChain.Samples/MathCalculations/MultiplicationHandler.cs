@@ -2,9 +2,12 @@
 {
     internal class MultiplicationHandler : ChainHandler<CalculationsRequest>
     {
-        public MultiplicationHandler(IChainHandler<CalculationsRequest>? handler)
+        private readonly DumbRepository _repository;
+
+        public MultiplicationHandler(IChainHandler<CalculationsRequest>? handler, DumbRepository repository)
             : base(handler)
         {
+            _repository = repository;
         }
 
         public override CalculationsRequest DoWork(CalculationsRequest request)
